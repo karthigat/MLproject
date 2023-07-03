@@ -6,9 +6,10 @@ from src.exception import CustomException
 from src.logger import logging
 import pandas as pd
 
-
 from sklearn.model_selection import train_test_split
 from dataclasses import dataclass
+
+from src.components.data_transformation import DataTransfomarion, DataTransformationConfig
 
 @dataclass # used to define the variable without init
 class DataIngestionConfig:
@@ -23,7 +24,7 @@ class DataIngestion:
     def initiate_data_ingestion(self):
         logging.info("Entered the data ingestion method or component")
         try:
-            df=pd.read_csv(r'dataset\stud.csv')
+            df=pd.read_csv(r'C:\Users\admin\Documents\ML_project\dataset\stud.csv')
             logging.info('Read the dataset as dataframe')
             
             
@@ -52,4 +53,7 @@ class DataIngestion:
         
 if __name__ == "__main__":
     obj = DataIngestion()
-    obj.initiate_data_ingestion()
+    train_data, test_data = obj.initiate_data_ingestion()
+
+    data_transformation = DataTransfomarion()
+    data_transformation.initiate_data_transformation(train_data, test_data)
