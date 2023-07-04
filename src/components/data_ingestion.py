@@ -11,6 +11,8 @@ from dataclasses import dataclass
 
 from src.components.data_transformation import DataTransfomarion, DataTransformationConfig
 
+from src.components.model_trainer import ModelTrainerConfig, ModelTrainer
+
 @dataclass # used to define the variable without init
 class DataIngestionConfig:
     train_data_path: str=os.path.join('artifacts', "train.csv")
@@ -56,4 +58,7 @@ if __name__ == "__main__":
     train_data, test_data = obj.initiate_data_ingestion()
 
     data_transformation = DataTransfomarion()
-    data_transformation.initiate_data_transformation(train_data, test_data)
+    train_arr, test_arr,_ = data_transformation.initiate_data_transformation(train_data, test_data)
+
+    model_trainer = ModelTrainer()
+    print(model_trainer.initiate_model_trainer(train_arr, test_arr))
