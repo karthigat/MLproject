@@ -5,4 +5,5 @@ dill
 scikit-learn
 xgboost
 catboost
+tqdm
 -e .
